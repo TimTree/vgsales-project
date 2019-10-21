@@ -28,14 +28,11 @@ column1 = dbc.Col(
     [
         dcc.Markdown(
             """
-        
-            ## Value Proposition
+            ## What games sell more?
 
-            Emphasize how the app will benefit users. Don't emphasize the underlying technology.
+            Predict video game sales numbers on various characteristics. Data inferred from a VGChartz dataset.
 
-            ✅ RUN is a running app that adapts to your fitness levels and designs personalized workouts to help you improve your running.
-
-            ❌ RUN is the only intelligent running app that uses sophisticated deep neural net machine learning to make your run smarter because we believe in ML driven workouts.
+            **Note:** All predictions are just for fun. Try not to take them seriously.
 
             """
         ),
