@@ -28,9 +28,9 @@ column1 = dbc.Col(
     [
         dcc.Markdown(
             """
-            ## What games sell more?
+            ## What games become hits?
 
-            Predict video game sales numbers on various characteristics. Data inferred from a VGChartz dataset.
+            Predict if a commercial video game will sell over 100,000 copies based on various characteristics. Data inferred from a [VGChartz dataset](https://www.kaggle.com/ashaheedq/video-games-sales-2019).
 
             **Note:** All predictions are just for fun. Try not to take them seriously.
 
