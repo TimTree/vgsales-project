@@ -30,13 +30,13 @@ column1 = dbc.Col(
             """
             ## What games become hits?
 
-            Predict if a commercial video game will sell over 100,000 copies based on various characteristics. Data inferred from a [VGChartz dataset](https://www.kaggle.com/ashaheedq/video-games-sales-2019).
+            Predict how likely a commercial video game will sell over 100,000 copies. Data inferred from a [VGChartz dataset](https://www.kaggle.com/ashaheedq/video-games-sales-2019).
 
             **Note:** All predictions are just for fun. Try not to take them seriously.
 
             """
         ),
-        dcc.Link(dbc.Button('Call To Action', color='primary'), href='/predictions')
+        dcc.Link(dbc.Button('Let\'s Predict!', color='primary'), href='/predictions')
     ],
     md=4,
 )

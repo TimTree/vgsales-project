@@ -6,6 +6,12 @@ from dash.dependencies import Input, Output
 
 from app import app
 
+column4 = dbc.Col(
+    [
+        dcc.Markdown('## Predictions'), 
+    ],
+)
+
 column1 = dbc.Col(
     [
         dcc.Markdown('#### Game Genre'), 
@@ -65,6 +71,7 @@ column1 = dbc.Col(
                 {'label': 'XB', 'value': 'XB'},  
                 {'label': 'PSV', 'value': 'PSV'},  
                 {'label': '3DS', 'value': '3DS'},  
+                {'label': 'GC', 'value': 'GC'},
                 {'label': 'XOne', 'value': 'XOne'},  
                 {'label': 'N64', 'value': 'N64'},  
                 {'label': 'NS', 'value': 'NS'},  
@@ -94,27 +101,35 @@ column1 = dbc.Col(
             ], 
             value = 'DS', 
             className='mb-5', 
-        ), 
+        ),
+    ],
+    md=3,
+)
+
+column3 = dbc.Col(
+    [
         dcc.Markdown('#### Year Released'), 
         dcc.Slider(
             id='Year', 
             min=1970, 
-            max=2030, 
+            max=2020, 
             step=1, 
             value=2010, 
-            marks={n: str(n) for n in range(1970,2031,10)}, 
+            marks={n: str(n) for n in range(1970,2021,10)}, 
             className='mb-5', 
         ), 
-        dcc.Markdown('#### Average Score'), 
+        html.Div(id='year-output',style={'marginBottom':'1em'}),
+        dcc.Markdown('#### Average Score (-0.1 if no score)'), 
         dcc.Slider(
             id='Average_Score', 
-            min=0, 
+            min=-0.1, 
             max=10, 
             step=0.1, 
             value=8, 
             marks={n: str(n) for n in range(0,11,1)}, 
             className='mb-5', 
         ), 
+        html.Div(id='score-output',style={'marginBottom':'1em'}),
         dcc.Markdown('#### Game Available on X Platforms (including this one)'), 
         dcc.Slider(
             id='Number_Platforms', 
@@ -132,11 +147,12 @@ column1 = dbc.Col(
             max=1000, 
             step=1, 
             value=1, 
-            marks={n: str(n) for n in range(0,1001,100)}, 
+            marks={n: str(n) for n in range(0,1001,100)},
             className='mb-5', 
         ), 
+        html.Div(id='number-games-publisher-output',style={'marginBottom':'1em'}),
     ],
-    md=6,
+    md=4,
 )
 
 from joblib import load
@@ -144,24 +160,44 @@ pipeline = load('assets/pipeline.joblib')
 
 column2 = dbc.Col(
     [
-        html.H2('Will this game sell over 100k?', className='mb-5'), 
-        html.Div(id='prediction-content', className='lead') 
+        html.H2('Probability this game will sell over 100k:', className='mb-5'), 
+        html.Div(id='prediction-content', style={'textAlign':'center','fontSize':'4em'}) 
     ]
 )
 
 import pandas as pd
 
 @app.callback(
-    Output('prediction-content', 'children'),
-    [Input('Genre', 'value'), Input('ESRB_Rating', 'value'),Input('Platform', 'value'),Input('Year', 'value'),Input('Average_Score', 'value'),Input('Number_Platforms', 'value'),Input('Number_Games_From_Publisher', 'value')],
+    Output(component_id='prediction-content', component_property='children'),
+    [Input('Genre', 'value'), Input('ESRB_Rating', 'value'),Input('Platform', 'value'),Input('Year', 'value'),Input('Average_Score', 'value'),Input('Number_Platforms', 'value'),Input('Number_Games_From_Publisher', 'value')]
 )
-def predict(genre, esrb_rating, platform, year, average_score, number_platforms, number_games_from_publisher):
+def update_output_div(genre, esrb_rating, platform, year, average_score, number_platforms, number_games_from_publisher):
     df = pd.DataFrame(
-        columns=['Genre', 'ESRB_Rating','Platform','Year','Average_Score','Number_Platforms','Number_Games_From_Publisher'], 
-        data=[[genre, esrb_rating, platform, year, average_score, number_platforms, number_games_from_publisher]]
+    columns=['Genre', 'ESRB_Rating','Platform','Year','Average_Score','Number_Platforms','Number_Games_From_Publisher'], 
+    data=[[genre, esrb_rating, platform, year, average_score,number_platforms, number_games_from_publisher]]
     )
-    y_pred = pipeline.predict(df)[0]
-    return f'{y_pred:.0f}'
+    y_pred = pipeline.predict_proba(df)[0]
+    #return f'{y_pred:.0f}'
     #return f'{'aaa':.0f}'
+    return '{}'.format(round(y_pred[1]*1000)/10) + '%'
 
-layout = dbc.Row([column1, column2])
+
+@app.callback(
+    dash.dependencies.Output('year-output', 'children'),
+    [dash.dependencies.Input('Year', 'value')])
+def update_output(value):
+    return 'You have selected "{}"'.format(value)
+
+@app.callback(
+    dash.dependencies.Output('score-output', 'children'),
+    [dash.dependencies.Input('Average_Score', 'value')])
+def update_output(value):
+    return 'You have selected "{}"'.format(value)
+
+@app.callback(
+    dash.dependencies.Output('number-games-publisher-output', 'children'),
+    [dash.dependencies.Input('Number_Games_From_Publisher', 'value')])
+def update_output(value):
+    return 'You have selected "{}"'.format(value)
+
+layout = dbc.Row([column4]),dbc.Row([column1, column3, column2])
