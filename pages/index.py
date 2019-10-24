@@ -38,16 +38,13 @@ column1 = dbc.Col(
         ),
         dcc.Link(dbc.Button('Let\'s Predict!', color='primary'), href='/predictions')
     ],
-    md=4,
+    md=6,
 )
-
-gapminder = px.data.gapminder()
-fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop", color="continent",
-           hover_name="country", log_x=True, size_max=60)
 
 column2 = dbc.Col(
     [
-        dcc.Graph(figure=fig),
+        html.Img(src='assets/MaxPixelGameController.jpg', className='img-fluid'),
+        html.Span('Image taken from Max Pixel, Creative Commons CC0')
     ]
 )
 
