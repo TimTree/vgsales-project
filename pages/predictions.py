@@ -116,9 +116,8 @@ column3 = dbc.Col(
             step=1, 
             value=2010, 
             marks={n: str(n) for n in range(1970,2021,10)}, 
-            className='mb-5', 
         ), 
-        html.Div(id='year-output',style={'marginBottom':'1em'}),
+        html.Div(id='year-output',style={'margin':'2em 0 1.5em 0'}),
         dcc.Markdown('#### Average Score (-0.1 if no score)'), 
         dcc.Slider(
             id='Average_Score', 
@@ -127,9 +126,8 @@ column3 = dbc.Col(
             step=0.1, 
             value=8, 
             marks={n: str(n) for n in range(0,11,1)}, 
-            className='mb-5', 
         ), 
-        html.Div(id='score-output',style={'marginBottom':'1em'}),
+        html.Div(id='score-output',style={'margin':'2em 0 1.5em 0'}),
         dcc.Markdown('#### Game Available on X Platforms (including this one)'), 
         dcc.Slider(
             id='Number_Platforms', 
@@ -148,9 +146,8 @@ column3 = dbc.Col(
             step=1, 
             value=1, 
             marks={n: str(n) for n in range(0,1001,100)},
-            className='mb-5', 
         ), 
-        html.Div(id='number-games-publisher-output',style={'marginBottom':'1em'}),
+        html.Div(id='number-games-publisher-output',style={'margin':'2em 0 1.5em 0'}),
     ],
     md=4,
 )
@@ -160,8 +157,8 @@ pipeline = load('assets/pipeline.joblib')
 
 column2 = dbc.Col(
     [
-        html.H2('Probability this game will sell over 100k:', className='mb-5'), 
-        html.Div(id='prediction-content', style={'textAlign':'center','fontSize':'4em'}) 
+        html.Div('Probability this game will sell over 100k:', className='outcomeHeader'), 
+        html.Div(id='prediction-content', className='outcomeResult') 
     ]
 )
 

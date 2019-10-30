@@ -1,0 +1,19 @@
+.outcomeHeader {
+    font-size:2.5rem;
+    margin-bottom:2rem;
+    line-height:1.2;
+}
+
+.outcomeResult {
+    text-align:center;
+    font-size:4em;
+}
+
+@media screen and (max-width: 900px) {
+    .outcomeHeader {
+      font-size:2.2rem;
+    }
+    .outcomeResult {
+        font-size:2.7rem;
+      }
+  }

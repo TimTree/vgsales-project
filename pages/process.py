@@ -13,7 +13,7 @@ column1 = dbc.Col(
         
             ## Process
 
-            This Web app is an assignment from Lambda School's Data Science program. The assignment asked to predict something given a dataset.
+            This web app is an assignment from Lambda School's Data Science program. The assignment asked to predict something given a dataset.
 
             In my case, I chose to predict video game sales.
 
@@ -57,7 +57,7 @@ column1 = dbc.Col(
 
             With the dataset cleaned, it was time to decide which features to use for the prediction.
 
-            Usually in data science, the more features, the better. But since this is a Web app, I needed to condense the features so the user wouldn't get overwhelmed. For instance, instead of having dropdowns for the critic, user, and vgchartz scores, there's just one dropdown for the averaged score.
+            Usually in data science, the more features, the better. But since this is a web app, I needed to condense the features so the user wouldn't get overwhelmed. For instance, instead of having dropdowns for the critic, user, and vgchartz scores, there's just one dropdown for the averaged score.
 
             In the end, I chose the seven features you see in the predictions page. As for the prediction model, I chose the random forest classifier because it led to the highest accuracy score. I explain how accuracy scores work in the Insights page.
             """
