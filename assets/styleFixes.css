@@ -9,6 +9,10 @@
     font-size:4em;
 }
 
+.titleText {
+    font-size:1.3rem;
+}
+
 @media screen and (max-width: 900px) {
     .outcomeHeader {
       font-size:2.2rem;
@@ -16,4 +20,10 @@
     .outcomeResult {
         font-size:2.7rem;
       }
+    h2 {
+        font-size:2rem;
+    }
+    h3 {
+        font-size:1.6rem;
+    }
   }

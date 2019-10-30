@@ -36,7 +36,8 @@ column1 = dbc.Col(
 
             """
         ),
-        dcc.Link(dbc.Button('Let\'s Predict!', color='primary'), href='/predictions')
+        dcc.Link(dbc.Button('Let\'s Predict!', color='primary'), href='/predictions'),
+        html.Div(style={'paddingBottom':'1rem'})
     ],
     md=6,
 )
