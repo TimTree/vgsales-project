@@ -103,7 +103,7 @@ column1 = dbc.Col(
             className='mb-5', 
         ),
     ],
-    md=3,
+    md=4,
 )
 
 column3 = dbc.Col(

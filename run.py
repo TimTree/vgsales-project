@@ -37,8 +37,7 @@ navbar = dbc.NavbarSimple(
     color='dark', 
     light=False, 
     dark=True,
-    style={'padding':'0.6rem 1rem'},
-    brand_style={'fontSize':'calc(16.5px + 0.3vw)'},
+    style={'padding':'0.4rem 1rem'},
 )
 
 footer = dbc.Container(
